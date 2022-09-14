@@ -14,7 +14,7 @@ class Enter(sm.State):
     def execute(self, userdata):
 	result = self.er(1.0, 0.3).result
 	if result:
-	    return 'enter_done'	
+	    return 'enter_done'
         else:#######
 
 class Learn(sm.State):
@@ -26,19 +26,35 @@ class Learn(sm.State):
 
 class Listen(sm.State):
     def __init__(self):
-        sm.State.__init__(self, outcomes = [])
+        sm.State.__init__(self, outcomes = []
+                              input_key = ['lc_count_in'])
+    # 3 times
     def execute(self, ):
+        rp.loginfo('Executing state: LISTEN')
+        lc = 
+        if l
 
-class Test
+class Test(sm.State):
     def __init__(self):
         sm.State.__init__(self, outcomes = [])
 
 def main():
     sm0 = sm.StateMachine(outcomes = ['succeeded','aborted','preempted']
-
+    sm0.userdata.listen_count = 0
     with sm0:
-        sm.StateMachine.add('ENTER',Enter(),
+        sm.StateMachine.add('ENTER', Enter(),
                             transitions = {''})
+        sm.StateMachine.add('LEARN', Learn(),
+                            transitions = {''}
+                            remapping = {'lc_in':'listen_count'})
+        sm.StateMachine.add('LISTEN', Listen(),
+                            transitions = {''})
+        sm.StateMachine.add('LEARN', Learn(),
+                            transitions = {''})
+        sm.StateMachine.add('LEARN', Learn(),
+                            transitions = {''})
+    outcomes = sm0.execute()
+
 
 if __name__ == '__main__':
     rp.init_node('team1_ggi_master')
