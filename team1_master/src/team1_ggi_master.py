@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 #-*- conding: utf-8 -*-
 import rospy as rp, smach as sm
-
 from enter_room.srv import EnterRoom
 from happymimi_navigation.srv import NaviLocation
 from ggi_voice
