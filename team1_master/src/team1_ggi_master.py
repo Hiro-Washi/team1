@@ -29,10 +29,11 @@ class Listen(sm.State):
         sm.State.__init__(self, outcomes = []
                               input_key = ['lc_count_in'])
     # 3 times
-    def execute(self, ):
+    def execute(self, userdata):
         rp.loginfo('Executing state: LISTEN')
-        lc = 
-        if l
+        lc = userdata.lc_count_in
+        
+        if lc
 
 class Test(sm.State):
     def __init__(self):
