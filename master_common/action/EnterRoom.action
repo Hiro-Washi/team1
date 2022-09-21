@@ -3,5 +3,5 @@ float32 velo
 ---
 bool result
 ---
-int8 time
-int8 dist
+string state
+float32 dist
