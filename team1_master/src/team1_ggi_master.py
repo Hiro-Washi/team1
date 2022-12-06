@@ -12,16 +12,18 @@ class SetPosition(sm.State):
 		sm.State.__init__(self, outcomes = ['sp_done']''',
                                input_key = ['sp_cmd_in']''')
 		self.navi_srv = rp.ServiceProxy('/navi_location_server',NaviLocation)
-	def execute(sm.State):
+	# Move to Operator
+    def execute(sm.State):
 		rp.loginfo('Executing state: SET POSITION')
-        sp_state = 1
-        if sp_state = 1:
-            sp_state += 1
-            self.navi_srv('start'); return 'sp_done'#####
-        elif sp_state = 4:
-            self.navi_srv('exit'); return 'sp_done'
-        else:
-            self.navi_srv('operater'); return 'sp_done'
+        
+        #sp_state = 1
+        #if sp_state = 1:
+        #    sp_state += 1
+        #    self.navi_srv('start'); return 'sp_done'#####
+        #elif sp_state = 4:
+        #    self.navi_srv('exit'); return 'sp_done'
+        #else:
+        #    self.navi_srv('operater'); return 'sp_done'
 class Enter(sm.State):
     def __init__(self):
         sm.State.__init__(self, outcomes = ['enter_done'])
@@ -57,11 +59,21 @@ class Listen(sm.State):
         lc = userdata.lc_count_in
         
         if lc
-class Test(sm.State):
+
+class Action(sm.State):
     def __init__(self):
-        sm.State.__init__(self, outcomes = [])
-	def execute(self, userdata):
-		rp.loginfo('Executing state: TEST')
+        sm.State.__init__(self, outcomes = ['act_done','act_falture'],
+                              input_keys = ['',''],
+                             output_keys = ['',''])
+        ###
+    def execute(self, userdata):
+        
+#class Test(sm.State):
+#    def __init__(self):
+#        sm.State.__init__(self, outcomes = [])
+#	def execute(self, userdata):
+#		rp.loginfo('Executing state: TEST')
+
 def main():
     sm0 = sm.StateMachine(outcomes = ['succeeded','aborted','preempted']
     #sm0.userdata.ggi_state = 0
@@ -72,6 +84,8 @@ def main():
 							remapping   = {'':''})
         sm.StateMachine.add('ENTER', Enter(),
                             transitions = {'enter_done':'LEARN'})
+        sm.StateMachine.add('TRAIN', Train(),
+                            transitions = {'train_done':''})
         sm.StateMachine.add('LEARN', Learn(),
                             transitions = {'learn_done':'SET_POSITION'})
         sm.StateMachine.add('LISTEN', Listen(),
